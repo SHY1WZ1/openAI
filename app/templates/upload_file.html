@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Text File</title>
+    
+    <!-- Cyberpunk Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Basic styling for the body */
+        body {
+            background: #0a0a0a;
+            color: #00ff99;
+            font-family: 'Roboto Mono', monospace;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        /* Centering container */
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #222;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 255, 153, 0.8);
+            max-width: 500px;
+            width: 100%;
+        }
+
+        /* Neon Glowing Text Style */
+        h1 {
+            color: #ff00ff;
+            text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff, 0 0 15px #ff00ff, 0 0 20px #ff00ff;
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+
+        /* Button Styling */
+        button {
+            background-color: #ff00ff;
+            color: #0a0a0a;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 5px rgba(255, 0, 255, 0.8);
+        }
+
+        button:hover {
+            background-color: #00ff99;
+            color: #0a0a0a;
+            box-shadow: 0 0 15px #ff00ff, 0 0 30px #00ff99;
+        }
+
+        /* Form Styling */
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        /* Form Inputs */
+        input[type="file"] {
+            background-color: #333;
+            border: 2px solid #00ff99;
+            color: #00ff99;
+            padding: 10px;
+            width: 100%;
+            font-size: 1rem;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        input[type="file"]:hover {
+            border-color: #ff00ff;
+        }
+
+        /* Link Styling */
+        a {
+            color: #00ff99;
+            text-decoration: none;
+            font-size: 1.1rem;
+            margin-top: 15px;
+        }
+
+        a:hover {
+            text-decoration: underline;
+            color: #ff00ff;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="glitch" data-text="Upload a Text File">Upload a Text File</h1>
+
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Upload</button>
+        </form>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modify Text File</title>
+    
+    <!-- Cyberpunk Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Basic styling for the body */
+        body {
+            background: #0a0a0a;
+            color: #00ff99;
+            font-family: 'Roboto Mono', monospace;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        /* Container for centering content */
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #222;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 255, 153, 0.8);
+            width: 100%;
+            max-width: 1000px;
+        }
+
+        /* Neon Glowing Text Style */
+        h1, h3 {
+            color: #ff00ff;
+            text-shadow: 0 0 5px #ff00ff, 0 0 1px #ff00ff, 0 0 1px #ff00ff, 0 0 5px #ff00ff;
+            text-align: center;
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+
+        h3 {
+            font-size: 2.5rem;
+        }
+
+        /* Glitch Effect for Text */
+        .glitch {
+            position: relative;
+            color: #ff00ff;
+            font-size: 2rem;
+        }
+
+        .glitch:after {
+            content: attr(data-text);
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: #00ff99;
+            text-shadow: 2px 0 red, -2px 0 cyan, 0 2px yellow, 0 -2px lime;
+            clip-path: inset(0 0 0 0);
+            animation: glitch 1.5s infinite;
+        }
+
+        @keyframes glitch {
+            0% { clip-path: inset(50% 0 50% 0); }
+            20% { clip-path: inset(50% 0 50% 0); }
+            40% { clip-path: inset(50% 0 50% 0); }
+            60% { clip-path: inset(50% 0 50% 0); }
+            80% { clip-path: inset(50% 0 50% 0); }
+            100% { clip-path: inset(50% 0 50% 0); }
+        }
+
+        /* Style for Preformatted Text */
+        pre {
+            background-color: #222;
+            color: #00ff99;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 1.5rem;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            width: 100%;
+            box-shadow: 0 0 10px rgba(0, 255, 153, 0.8);
+            margin-bottom: 30px;
+        }
+
+        /* Form Styling */
+        form {
+            background-color: #333;
+            padding: 15px;
+            border-radius: 10px;
+            width: 100%;
+            box-shadow: 0 0 10px rgba(0, 255, 153, 0.8);
+            margin-bottom: 20px;
+        }
+
+        form button {
+            background-color: #ff00ff;
+            color: #0a0a0a;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 5px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        form button:hover {
+            background-color: #00ff99;
+            color: #0a0a0a;
+            box-shadow: 0 0 15px #ff00ff, 0 0 30px #00ff99;
+        }
+
+        /* Link Styling */
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #00ff99;
+            text-decoration: none;
+            font-size: 1.1rem;
+        }
+
+        a:hover {
+            text-decoration: underline;
+            color: #ff00ff;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="glitch" data-text="Modify the Uploaded File">Modify the Uploaded File</h1>
+
+        <p><strong>Original Content:</strong></p>
+        <pre>{{ file_content }}</pre>
+
+        <h3>Provide a Prompt for OpenAI to Modify the Text:</h3>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Modify Text</button>
+        </form>
+
+    </div>
+</body>
+</html>
