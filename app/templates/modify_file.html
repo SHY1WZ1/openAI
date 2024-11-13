@@ -16,39 +16,40 @@
             font-family: 'Roboto Mono', monospace;
             margin: 0;
             padding: 0;
-            overflow-x: hidden;
-            display: flex;
-            justify-content: center;
+            display: grid;
+            justify-items: center;
             align-items: center;
             height: 100vh;
             text-align: center;
+            overflow: hidden;
         }
 
-        /* Container for centering content */
+        /* Grid layout for the container */
         .container {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: auto auto 1fr;
+            grid-gap: 20px;
             background-color: #222;
             padding: 30px;
             border-radius: 15px;
             box-shadow: 0 0 20px rgba(0, 255, 153, 0.8);
-            width: 100%;
+            width: 80%;
             max-width: 1000px;
+            height: auto;
         }
 
         /* Neon Glowing Text Style */
         h1, h3 {
             color: #ff00ff;
-            text-shadow: 0 0 5px #ff00ff, 0 0 1px #ff00ff, 0 0 1px #ff00ff, 0 0 5px #ff00ff;
+            text-shadow: 0 0 5px #ff00ff, 0 0 1px #ff00ff, 0 0 1px #ff00ff, 0 0 1px #ff00ff;
             text-align: center;
-            font-size: 4rem;
+            font-size: 2rem;
             margin-bottom: 20px;
         }
 
         h3 {
-            font-size: 2.5rem;
+            font-size: 1.5rem;
         }
 
         /* Glitch Effect for Text */
@@ -78,31 +79,48 @@
             100% { clip-path: inset(50% 0 50% 0); }
         }
 
-        /* Style for Preformatted Text */
+        /* Style for Preformatted Text with Fixed Height and Scrolling */
         pre {
             background-color: #222;
             color: #00ff99;
             padding: 15px;
             border-radius: 10px;
-            font-size: 1.5rem;
-            overflow-x: auto;
+            font-size: 1.2rem;
             white-space: pre-wrap;
             word-wrap: break-word;
-            width: 100%;
             box-shadow: 0 0 10px rgba(0, 255, 153, 0.8);
             margin-bottom: 30px;
+            height: 300px; /* Fixed height and scrollable */
+            overflow-y: auto; /* Enables vertical scroll */
         }
 
         /* Form Styling */
         form {
             background-color: #333;
-            padding: 15px;
             border-radius: 10px;
             width: 100%;
+            box-shadow: 0 0 10px rgba(0, 255, 153, 0.8);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Centering the Textarea */
+        form textarea {
+            width: 80%; /* Adjust width as necessary */
+            height: 100px; /* Adjust height as necessary */
+            background-color: #222;
+            color: #00ff99;
+            border: 1px solid #00ff99;
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 1.2rem;
+            resize: vertical;
             box-shadow: 0 0 10px rgba(0, 255, 153, 0.8);
             margin-bottom: 20px;
         }
 
+        /* Button Styling */
         form button {
             background-color: #ff00ff;
             color: #0a0a0a;
@@ -152,7 +170,6 @@
             {{ form.as_p }}
             <button type="submit">Modify Text</button>
         </form>
-
     </div>
 </body>
 </html>

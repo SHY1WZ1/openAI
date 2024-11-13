@@ -28,7 +28,7 @@ def modify_file(request, file_id):
     file_obj = TextFile.objects.get(id=file_id)
     file_path = file_obj.file.path
     # Read the contents of the uploaded file
-    with open(file_path, "r") as file:
+    with open(file_path, "r", encoding="utf-8") as file:
         file_content = file.read()
 
     if request.method == "POST":
