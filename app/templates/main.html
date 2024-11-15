@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}AI TEXT TRANFORM {% endblock %}</title>
+
+    <!-- Link to a common stylesheet for all pages -->
+</head>
+
+<body>
+
+    <!-- Include the navbar from navbar.html -->
+    {% include 'navbar.html' %}
+
+    <!-- Main content area -->
+    <div class="content">
+        {% block content %}
+        <!-- Content from specific page will go here -->
+        {% endblock %}
+    </div>
+
+</body>
+
+</html>

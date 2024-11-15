@@ -7,6 +7,8 @@ class TextFileForm(forms.ModelForm):
         model = TextFile
         fields = ['file']
 
-# Create a separate form for the user to input the prompt they want to send to OpenAI
+
+
 class PromptForm(forms.Form):
-    prompt = forms.CharField(widget=forms.Textarea(attrs={'rows': 5, 'cols': 40}), label="Prompt for OpenAI")
+    temperature = forms.FloatField(min_value=0.0, max_value=1.0, initial=0.7, label="Temperature")
+    top_p = forms.FloatField(min_value=0.0, max_value=1.0, initial=1.0, label="Top_p")

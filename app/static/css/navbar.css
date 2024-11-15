@@ -1,0 +1,66 @@
+/* Basic Styling for the body */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+/* Navbar Styling */
+nav {
+    background-color: #000000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 10px 20px;
+    box-shadow: 0 5px 10px #00ff99;
+}
+
+/* Logo Styling */
+.logo {
+    color: #ff00ff;  /* Neon pink color */
+    font-size: 2rem;
+    text-decoration: none;
+    font-weight: bold;
+    letter-spacing: 2px;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.logo:hover {
+    color: #00ff99;  /* Neon green on hover */
+    transform: scale(1.1);  /* Slight zoom effect */
+}
+
+/* Navbar Links Styling */
+ul {
+    margin: 0;
+    padding: 0;
+    justify-content: space-between;
+    display: flex; /* Display list items horizontally */
+    width: 25%;
+}
+
+ul li {
+    margin-left: 20px; /* Space between links */
+}
+
+ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: color 0.3s ease;
+}
+
+ul li a:hover {
+    color: #ff6347; /* Tomato color on hover */
+}
+
+/* Add padding to body content to prevent overlap with fixed navbar */
+body {
+    padding-top: 60px; /* Adjust this based on the height of your navbar */
+}

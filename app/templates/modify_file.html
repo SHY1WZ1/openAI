@@ -1,162 +1,20 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modify Text File</title>
-    
+
     <!-- Cyberpunk Font -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
-    
-    <style>
-        /* Basic styling for the body */
-        body {
-            background: #0a0a0a;
-            color: #00ff99;
-            font-family: 'Roboto Mono', monospace;
-            margin: 0;
-            padding: 0;
-            display: grid;
-            justify-items: center;
-            align-items: center;
-            height: 100vh;
-            text-align: center;
-            overflow: hidden;
-        }
-
-        /* Grid layout for the container */
-        .container {
-            display: grid;
-            grid-template-columns: 1fr;
-            grid-template-rows: auto auto 1fr;
-            grid-gap: 20px;
-            background-color: #222;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 0 20px rgba(0, 255, 153, 0.8);
-            width: 80%;
-            max-width: 1000px;
-            height: auto;
-        }
-
-        /* Neon Glowing Text Style */
-        h1, h3 {
-            color: #ff00ff;
-            text-shadow: 0 0 5px #ff00ff, 0 0 1px #ff00ff, 0 0 1px #ff00ff, 0 0 1px #ff00ff;
-            text-align: center;
-            font-size: 2rem;
-            margin-bottom: 20px;
-        }
-
-        h3 {
-            font-size: 1.5rem;
-        }
-
-        /* Glitch Effect for Text */
-        .glitch {
-            position: relative;
-            color: #ff00ff;
-            font-size: 2rem;
-        }
-
-        .glitch:after {
-            content: attr(data-text);
-            position: absolute;
-            left: 0;
-            top: 0;
-            color: #00ff99;
-            text-shadow: 2px 0 red, -2px 0 cyan, 0 2px yellow, 0 -2px lime;
-            clip-path: inset(0 0 0 0);
-            animation: glitch 1.5s infinite;
-        }
-
-        @keyframes glitch {
-            0% { clip-path: inset(50% 0 50% 0); }
-            20% { clip-path: inset(50% 0 50% 0); }
-            40% { clip-path: inset(50% 0 50% 0); }
-            60% { clip-path: inset(50% 0 50% 0); }
-            80% { clip-path: inset(50% 0 50% 0); }
-            100% { clip-path: inset(50% 0 50% 0); }
-        }
-
-        /* Style for Preformatted Text with Fixed Height and Scrolling */
-        pre {
-            background-color: #222;
-            color: #00ff99;
-            padding: 15px;
-            border-radius: 10px;
-            font-size: 1.2rem;
-            white-space: pre-wrap;
-            word-wrap: break-word;
-            box-shadow: 0 0 10px rgba(0, 255, 153, 0.8);
-            margin-bottom: 30px;
-            height: 300px; /* Fixed height and scrollable */
-            overflow-y: auto; /* Enables vertical scroll */
-        }
-
-        /* Form Styling */
-        form {
-            background-color: #333;
-            border-radius: 10px;
-            width: 100%;
-            box-shadow: 0 0 10px rgba(0, 255, 153, 0.8);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        /* Centering the Textarea */
-        form textarea {
-            width: 80%; /* Adjust width as necessary */
-            height: 100px; /* Adjust height as necessary */
-            background-color: #222;
-            color: #00ff99;
-            border: 1px solid #00ff99;
-            border-radius: 5px;
-            padding: 10px;
-            font-size: 1.2rem;
-            resize: vertical;
-            box-shadow: 0 0 10px rgba(0, 255, 153, 0.8);
-            margin-bottom: 20px;
-        }
-
-        /* Button Styling */
-        form button {
-            background-color: #ff00ff;
-            color: #0a0a0a;
-            border: none;
-            padding: 15px 25px;
-            border-radius: 5px;
-            font-size: 1.5rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            width: 100%;
-            margin-top: 10px;
-        }
-
-        form button:hover {
-            background-color: #00ff99;
-            color: #0a0a0a;
-            box-shadow: 0 0 15px #ff00ff, 0 0 30px #00ff99;
-        }
-
-        /* Link Styling */
-        a {
-            display: block;
-            text-align: center;
-            margin-top: 20px;
-            color: #00ff99;
-            text-decoration: none;
-            font-size: 1.1rem;
-        }
-
-        a:hover {
-            text-decoration: underline;
-            color: #ff00ff;
-        }
-
-    </style>
+    <link rel="stylesheet" href="{% static 'css/modify_file.css' %}">
 </head>
+
 <body>
     <div class="container">
         <h1 class="glitch" data-text="Modify the Uploaded File">Modify the Uploaded File</h1>
@@ -164,12 +22,52 @@
         <p><strong>Original Content:</strong></p>
         <pre>{{ file_content }}</pre>
 
-        <h3>Provide a Prompt for OpenAI to Modify the Text:</h3>
-        <form method="post">
+        <h3>Provide Model Parameters:</h3>
+
+        <form method="POST">
             {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Modify Text</button>
+
+            <div class="form-group">
+                <label for="temperature">Temperature</label>
+                <div class="slider-container">
+                    <input type="range" id="temperature" name="temperature" class="slider" min="0" max="1" step="0.01"
+                        value="{{ form.temperature.value }}" oninput="updateValue('temperature')">
+                    <span class="slider-value" id="temperature-value">{{ form.temperature.value }}</span>
+                    <span class="slider-info">
+                        Controls randomness when picking words during text creation.
+                    </span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="top_p">Top_p</label>
+                <div class="slider-container">
+                    <input type="range" id="top_p" name="top_p" class="slider" min="0" max="1" step="0.01"
+                        value="{{ form.top_p.value }}" oninput="updateValue('top_p')">
+                    <span class="slider-value" id="top_p-value">{{ form.top_p.value }}</span>
+                    <span class="slider-info">
+                        Decides how many possible words to consider.
+                    </span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn-submit">Submit</button>
+            </div>
         </form>
     </div>
+
+    <script>
+        // Function to update the slider value display
+        function updateValue(sliderId) {
+            var slider = document.getElementById(sliderId);
+            var valueDisplay = document.getElementById(sliderId + '-value');
+            valueDisplay.textContent = slider.value;
+        }
+    </script>
+
 </body>
+
 </html>
+
+{% endblock %}
