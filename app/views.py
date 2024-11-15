@@ -5,7 +5,7 @@ from django.conf import settings
 from .forms import TextFileForm, PromptForm
 from .models import TextFile
 
-# Set up OpenAI API key from settings
+# Set up OpenAI API key strictly/from settings
 openai.api_key = 'your_api_key'
 
 # View to upload a file
@@ -44,7 +44,7 @@ def modify_file(request, file_id):
                 "An <img> tag with the src attribute set to 'image_placeholder.jpg' (left side of the section). "
                 "Add an alt attribute for each image with a detailed prompt that can be used to generate the image.\n\n"
                 "Include captions under each image using the appropriate HTML <figcaption> tag.\n\n"
-                "The result should include only the content inside the <body> and </body> tags, with no other HTML structure."
+                "The result should include only the content inside the <body> and </body> tags"
             )
 
             # Get values for temperature and top_p from the form
@@ -63,7 +63,7 @@ def modify_file(request, file_id):
                         {"role": "system", "content": "You are a helpful assistant."},
                         {"role": "user", "content": f"Modify the following text based on this prompt: {prompt}\n\nText:\n{file_content}"}
                     ],
-                    max_tokens=1000,  # Limit the response length
+                    max_tokens=2000,  # Limit the response length
                     temperature=temperature,
                     top_p=top_p,
                 )
