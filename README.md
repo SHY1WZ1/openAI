@@ -35,22 +35,22 @@ This Django application allows users to upload text files, modify the content us
     - Obtain an API key from OpenAI [here](https://platform.openai.com/).
     - Add the OpenAI API key to your `settings.py` or use environment variables to securely store the key.
     
-    Example for `settings.py`:
 
-    ```python
-    OPENAI_API_KEY = 'your-openai-api-key-here'
-    ```
-
+    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    !!! In our case test just provide your key for my security reason !!!
+        `openai.api_key = 'your-openai-api-key-here'` at `views.py`
+    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+   
     *Important*: Never expose your API key in public repositories or commit it to version control.
 
-4. **Database Setup**:
+5. **Database Setup**:
     Run the following command to create the necessary database tables:
 
     ```bash
     python manage.py migrate
     ```
 
-5. **Run the Development Server**:
+6. **Run the Development Server**:
     Start the Django development server:
 
     ```bash
